@@ -18,10 +18,7 @@ async function signup(req, res){
 
     const token = user.generateAuthToken();
 
-    res.header('x-auth-token', token).send({
-        token,
-        userId:user._id
-    });
+    res.header('x-auth-token', token).send(token);
 }
 
 async function signin(req, res){
@@ -30,10 +27,7 @@ async function signin(req, res){
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if(!validPassword) return res.status(400).send('Invalid Email or Password');
     const token = user.generateAuthToken();
-    res.status(200).json({
-        userId: user._id,
-        token
-    })
+    res.send(token);
 }
 
 async function profile(req, res){
