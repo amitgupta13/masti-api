@@ -1,4 +1,4 @@
 {
-    "jwtPrivateKey": "",
-    "db": "mongodb://localhost/masti"
+  "jwtPrivateKey": "",
+  "db": "mongodb://localhost/masti"
 }

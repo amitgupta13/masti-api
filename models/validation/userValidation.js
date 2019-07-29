@@ -1,27 +1,37 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
-function validateSignup(req){
-    const schema = {
-        name: Joi.string().required(),
-        email: Joi.string().required().email(),
-        password: Joi.string().min(5).max(1024).required(),
-        phone: Joi.string(),
-        image: Joi.string()
-    }
+function validateSignup(req) {
+  const schema = {
+    name: Joi.string().required(),
+    email: Joi.string()
+      .required()
+      .email(),
+    password: Joi.string()
+      .min(5)
+      .max(1024)
+      .required(),
+    phone: Joi.string(),
+    image: Joi.string()
+  };
 
-    return Joi.validate(req, schema);
+  return Joi.validate(req, schema);
 }
 
-function validateSignin(req){
-    const schema = {
-        email: Joi.string().required().email(),
-        password: Joi.string().min(5).max(1024).required()
-    }
+function validateSignin(req) {
+  const schema = {
+    email: Joi.string()
+      .required()
+      .email(),
+    password: Joi.string()
+      .min(5)
+      .max(1024)
+      .required()
+  };
 
-    return Joi.validate(req, schema);
+  return Joi.validate(req, schema);
 }
 
 module.exports = {
-    validateSignup,
-    validateSignin
-}
+  validateSignup,
+  validateSignin
+};
