@@ -15,7 +15,7 @@ async function addProject(req, res) {
 }
 
 async function editProject(req, res) {
-  let project = await Project.useFind(
+  let project = await Project.find(
     req.params.id,
     {
       name: req.body.name,

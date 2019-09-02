@@ -8,9 +8,10 @@ async function signup(req, res) {
   user = new User({
     name: req.body.name,
     email: req.body.email,
-    phone: req.body.phone,
-    image: req.body.image
+    phone: req.body.phone
   });
+
+  user.image = `https://robohash.org/${user._id}`;
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(req.body.password, salt);
