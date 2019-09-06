@@ -10,7 +10,21 @@ const getProducts = async (req, res) => {
     .skip(skip ? +skip : 0)
     .limit(limit ? +limit : 10);
 
-  res.status(200).json(products);
+  return res.status(200).json(products);
 };
 
-module.exports = { getProducts };
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+
+  var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+
+  if (!checkForHexRegExp.test(id))
+    return res.status(400).send("Invalid mongo Id");
+
+  const del = await Product.deleteOne({ _id: id });
+  if (del.deletedCount < 1)
+    return res.status(400).send(`Product with id ${id} does not exists`);
+  return res.status(200).send(`Product with id ${id} deleted`);
+};
+
+module.exports = { getProducts, deleteProduct };
