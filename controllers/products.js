@@ -3,7 +3,12 @@ const { Product } = require("../models/products");
 const getProducts = async (req, res) => {
   const { search, sort, order, skip, limit } = req.query;
   const soryBy = sort ? sort : "name";
-  const products = await Product.find({ name: new RegExp(search) })
+  const products = await Product.find({
+    $or: [
+      { name: new RegExp(search, "i") },
+      { description: new RegExp(search, "i") }
+    ]
+  })
     .sort({
       [soryBy]: order ? +order : 1
     })

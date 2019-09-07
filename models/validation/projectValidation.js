@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require("@hapi/joi");
 
 function validateProject(req) {
   const schema = {
@@ -8,7 +8,7 @@ function validateProject(req) {
     technologies: Joi.array().required()
   };
 
-  return Joi.validate(req, schema);
+  return Joi.validate(req, schema, { abortEarly: false });
 }
 
 module.exports = {
