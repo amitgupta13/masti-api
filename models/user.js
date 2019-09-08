@@ -28,6 +28,14 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now()
   }
 });
 
